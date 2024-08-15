@@ -6,10 +6,13 @@ const bookshelfTypes = [
   { name: "currentlyReading", header: "Currently Reading" },
   { name: "wantToRead", header: "Want to Read" },
   { name: "read", header: "Read" },
-]
+];
 
 const ListPage = ({ books, addBooks }) => {
-  const booksByShelf = (shelf) => books.filter(book => { return book.shelf === shelf });
+  const booksByShelf = (shelf) =>
+    books.filter((book) => {
+      return book.shelf === shelf;
+    });
   return (
     <div className="list-books">
       <div className="list-books-title">
@@ -29,7 +32,7 @@ const ListPage = ({ books, addBooks }) => {
         <Link to="/search">Add a book</Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default ListPage;

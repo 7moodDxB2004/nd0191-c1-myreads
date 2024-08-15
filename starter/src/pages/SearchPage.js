@@ -7,7 +7,7 @@ const SearchPage = ({ books, addBooks }) => {
   const [query, setQuery] = useState("");
   const [visibleBooks, setVisibleBooks] = useState(books);
 
-  const handleQuery = e => {
+  const handleQuery = (e) => {
     setQuery(e.target.value);
     if (!query) {
       setVisibleBooks(books);
@@ -18,12 +18,14 @@ const SearchPage = ({ books, addBooks }) => {
     search(query.toLowerCase(), 20).then((res) => {
       if (Array.isArray(res)) setVisibleBooks(res);
     });
-  }
+  };
 
   return (
     <div className="search-books">
       <div className="search-books-bar">
-        <Link className="close-search" to="/">Close</Link>
+        <Link className="close-search" to="/">
+          Close
+        </Link>
         <div className="search-books-input-wrapper">
           <input
             id="book-search"
@@ -36,13 +38,14 @@ const SearchPage = ({ books, addBooks }) => {
       </div>
       <div className="search-books-results">
         <ol className="books-grid">
-          {Array.isArray(visibleBooks) && visibleBooks.map(book => (
-            <Book key={book.id} book={book} addBooks={addBooks} />
-          ))}
+          {Array.isArray(visibleBooks) &&
+            visibleBooks.map((book) => (
+              <Book key={book.id} book={book} addBooks={addBooks} />
+            ))}
         </ol>
       </div>
     </div>
   );
-}
+};
 
 export default SearchPage;

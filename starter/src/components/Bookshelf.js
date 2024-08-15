@@ -6,13 +6,13 @@ const Bookshelf = ({ books, header, addBooks }) => {
       <h2 className="bookshelf-title">{header}</h2>
       <div className="bookshelf-books">
         <ol className="books-grid">
-          {books.map(book => (
+          {books.map((book) => (
             <Book key={book.id} book={book} addBooks={addBooks} />
           ))}
         </ol>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Bookshelf;

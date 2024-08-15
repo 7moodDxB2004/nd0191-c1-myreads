@@ -9,9 +9,9 @@ function App() {
   const [books, setBooks] = useState([]);
 
   // Add the book if it isn't in the books array
-  const addBooks = book => {
-    setBooks(books.filter(b => b.id !== book.id).concat(book));
-  }
+  const addBooks = (book) => {
+    setBooks(books.filter((b) => b.id !== book.id).concat(book));
+  };
 
   useEffect(() => {
     const getAllBooks = async () => {
@@ -25,8 +25,16 @@ function App() {
   return (
     <div className="app">
       <Routes>
-        <Route exact path="/" element={<ListPage books={books} addBooks={addBooks} />} />
-        <Route exact path="/search" element={<SearchPage books={books} addBooks={addBooks} />} />
+        <Route
+          exact
+          path="/"
+          element={<ListPage books={books} addBooks={addBooks} />}
+        />
+        <Route
+          exact
+          path="/search"
+          element={<SearchPage books={books} addBooks={addBooks} />}
+        />
       </Routes>
     </div>
   );
