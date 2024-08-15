@@ -1,15 +1,15 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import SearchPage from "./SearchPage";
-import ListPage from "./ListPage";
+import SearchPage from "./pages/SearchPage";
+import ListPage from "./pages/ListPage";
 import { getAll } from "./BooksAPI";
 
 function App() {
   const [books, setBooks] = useState([]);
 
+  // Add the book if it isn't in the books array
   const addBooks = book => {
-    // Add the book if it isn't in the books array
     setBooks(books.filter(b => b.id !== book.id).concat(book));
   }
 
