@@ -1,14 +1,7 @@
 import { Link } from "react-router-dom";
 import Bookshelf from "../components/Bookshelf";
 
-// Array including the differences in UI between bookshelves
-const bookshelfTypes = [
-  { name: "currentlyReading", header: "Currently Reading" },
-  { name: "wantToRead", header: "Want to Read" },
-  { name: "read", header: "Read" },
-];
-
-const ListPage = ({ books, addBooks }) => {
+const ListPage = ({ books, addBooks, bookshelves }) => {
   const booksByShelf = (shelf) =>
     books.filter((book) => {
       return book.shelf === shelf;
@@ -19,12 +12,13 @@ const ListPage = ({ books, addBooks }) => {
         <h1>MyReads</h1>
       </div>
       <div className="list-books-content">
-        {bookshelfTypes.map((bookshelf, id) => (
+        {bookshelves.map((bookshelf) => (
           <Bookshelf
-            key={id}
+            key={bookshelf.id}
             books={booksByShelf(bookshelf.name)}
             header={bookshelf.header}
             addBooks={addBooks}
+            bookshelves={bookshelves}
           />
         ))}
       </div>

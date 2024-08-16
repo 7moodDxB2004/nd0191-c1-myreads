@@ -1,6 +1,6 @@
 import { update } from "../BooksAPI";
 
-const Book = ({ book, addBooks }) => {
+const Book = ({ book, addBooks, bookshelves }) => {
   return (
     <li key={book.id}>
       <div className="book">
@@ -27,18 +27,20 @@ const Book = ({ book, addBooks }) => {
               }
             >
               <option value="none" disabled>
-                {book.shelf ? `Move to...` : `Add to ...`}
+                {book.shelf ? "Move to..." : "Add to ..."}
               </option>
-              <option value="currentlyReading">Currently Reading</option>
-              <option value="wantToRead">Want to Read</option>
-              <option value="read">Read</option>
+              {bookshelves.map((bookshelf) => (
+                <option key={bookshelf.id} value={bookshelf.name}>
+                  {bookshelf.header}
+                </option>
+              ))}
               {book.shelf && <option value="none">None</option>}
             </select>
           </div>
         </div>
         <div className="book-title">{book.title}</div>
         <div className="book-authors">
-          {book.authors ? book.authors[0] : ""}
+          {book.authors ? book.authors.join(", ") : ""}
         </div>
       </div>
     </li>

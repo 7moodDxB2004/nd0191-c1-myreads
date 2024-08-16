@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Book from "../components/Book";
 import { search } from "../BooksAPI";
 
-const SearchPage = ({ books, addBooks }) => {
+const SearchPage = ({ books, addBooks, bookshelves }) => {
   const [query, setQuery] = useState("");
   const [visibleBooks, setVisibleBooks] = useState(books);
 
@@ -15,8 +15,18 @@ const SearchPage = ({ books, addBooks }) => {
     }
 
     // Check if the results are in the correct datatype
+    // and include the correct shelf that the book belongs to.
     search(query.toLowerCase(), 20).then((res) => {
-      if (Array.isArray(res)) setVisibleBooks(res);
+      if (Array.isArray(res)) {
+        const updateBooks = res.map((searchBook) => {
+          const bookFound = books.find((b) => b.id === searchBook.id);
+          if (bookFound) searchBook.shelf = bookFound.shelf;
+
+          return searchBook;
+        });
+
+        setVisibleBooks(updateBooks);
+      }
     });
   };
 
@@ -40,7 +50,12 @@ const SearchPage = ({ books, addBooks }) => {
         <ol className="books-grid">
           {Array.isArray(visibleBooks) &&
             visibleBooks.map((book) => (
-              <Book key={book.id} book={book} addBooks={addBooks} />
+              <Book
+                key={book.id}
+                book={book}
+                addBooks={addBooks}
+                bookshelves={bookshelves}
+              />
             ))}
         </ol>
       </div>
