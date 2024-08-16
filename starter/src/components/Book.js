@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { update } from "../BooksAPI";
 
 const Book = ({ book, addBooks, bookshelves }) => {
@@ -45,6 +46,12 @@ const Book = ({ book, addBooks, bookshelves }) => {
       </div>
     </li>
   );
+};
+
+Book.propTypes = {
+  book: PropTypes.object.isRequired,
+  addBooks: PropTypes.func.isRequired,
+  bookshelves: PropTypes.array.isRequired,
 };
 
 export default Book;
